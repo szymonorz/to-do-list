@@ -1,0 +1,165 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+MERGED from [com.google.android.material:material:1.2.0-alpha03] /home/szymon/.gradle/caches/transforms-2/files-2.1/5727f2d49e55804e5b9a693cb3d9571a/material-1.2.0-alpha03/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-beta4] /home/szymon/.gradle/caches/transforms-2/files-2.1/fb296aecee95b6acf8e1e9cca64eafde/constraintlayout-2.0.0-beta4/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/31016c6c0856b517b84ecfbcfb815ff0/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/1a48618d6c5819b93f43ddd9a04c22dd/core-ktx-1.1.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f2304edbe31cf29abb592acc14f7dc40/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/2decefe6445f181eb707fffdb87e64ad/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/6589ea9df5e4c5732121f087e6d0e86b/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.squareup:android-times-square:1.7.10] /home/szymon/.gradle/caches/transforms-2/files-2.1/7e65a190501a3ab5f46099417cae59f6/android-times-square-1.7.10/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.fragment:fragment:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/9c96e3c7610a71f64d933abf5d989c41/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/3c6026bf367a81ae0b26f6a0755e7c5c/appcompat-resources-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/9eeb03172080be4be809eb3b789602a2/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/40bc7c61bac6f76d8b8baba1e6746ffa/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d81313297acd4b62a12e1c4be346ea86/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/b403c837ac7d55e559d7b654aa580176/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.2.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/13dc468f7cfee2eb01713f4b7958d2e6/transition-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/8042381f1240df5f98ac8c5a464644dd/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/2485cb75ca766726d2f85318526894e3/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d4d6f1b618f6740b3852fbc0a4f6708f/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/47bf1c1672b530aea741a2298486de75/activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f71f8da7ba118f56b7a69563a8255a28/core-1.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/6ad38dfac4e106a4ff4e5e048c9d7854/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/5aa6e1ee8a4aa87ed09e4136bb1359d6/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d5a39d8f51fcfc1b19c3ec4132b72e21/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/8be5234bafda9ab14ed7f88c9dd40d77/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/621e01429d79a08e6530f2907ad873bf/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/e05a230acf535e3dec39f0f39ed5f0ca/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/004fb91108e1b1927119709e2ff43030/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/3a3ed459510bf208b94d56b861c80196/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/ab93a8dbadb16e1d4464b7fe897665b9/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/1a03c688fd0be1e0d5393144f4840983/annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+	package
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:2:5-41
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:1-19:12
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:4:5-18:19
+MERGED from [com.google.android.material:material:1.2.0-alpha03] /home/szymon/.gradle/caches/transforms-2/files-2.1/5727f2d49e55804e5b9a693cb3d9571a/material-1.2.0-alpha03/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.2.0-alpha03] /home/szymon/.gradle/caches/transforms-2/files-2.1/5727f2d49e55804e5b9a693cb3d9571a/material-1.2.0-alpha03/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-beta4] /home/szymon/.gradle/caches/transforms-2/files-2.1/fb296aecee95b6acf8e1e9cca64eafde/constraintlayout-2.0.0-beta4/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-beta4] /home/szymon/.gradle/caches/transforms-2/files-2.1/fb296aecee95b6acf8e1e9cca64eafde/constraintlayout-2.0.0-beta4/AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f71f8da7ba118f56b7a69563a8255a28/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f71f8da7ba118f56b7a69563a8255a28/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/5aa6e1ee8a4aa87ed09e4136bb1359d6/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/5aa6e1ee8a4aa87ed09e4136bb1359d6/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f71f8da7ba118f56b7a69563a8255a28/core-1.1.0/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:7:9-41
+	android:roundIcon
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:8:9-54
+	android:icon
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:6:9-43
+	android:allowBackup
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:5:9-35
+	android:theme
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:10:9-40
+activity#com.example.todolistkotlin.MainActivity
+ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:11:9-17:20
+	android:name
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:11:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:12:13-16:29
+action#android.intent.action.MAIN
+ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:13:17-68
+	android:name
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:13:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:15:17-76
+	android:name
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml:15:27-74
+uses-sdk
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+MERGED from [com.google.android.material:material:1.2.0-alpha03] /home/szymon/.gradle/caches/transforms-2/files-2.1/5727f2d49e55804e5b9a693cb3d9571a/material-1.2.0-alpha03/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.2.0-alpha03] /home/szymon/.gradle/caches/transforms-2/files-2.1/5727f2d49e55804e5b9a693cb3d9571a/material-1.2.0-alpha03/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-beta4] /home/szymon/.gradle/caches/transforms-2/files-2.1/fb296aecee95b6acf8e1e9cca64eafde/constraintlayout-2.0.0-beta4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-beta4] /home/szymon/.gradle/caches/transforms-2/files-2.1/fb296aecee95b6acf8e1e9cca64eafde/constraintlayout-2.0.0-beta4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/31016c6c0856b517b84ecfbcfb815ff0/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/31016c6c0856b517b84ecfbcfb815ff0/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/1a48618d6c5819b93f43ddd9a04c22dd/core-ktx-1.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/1a48618d6c5819b93f43ddd9a04c22dd/core-ktx-1.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f2304edbe31cf29abb592acc14f7dc40/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f2304edbe31cf29abb592acc14f7dc40/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/2decefe6445f181eb707fffdb87e64ad/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/2decefe6445f181eb707fffdb87e64ad/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/6589ea9df5e4c5732121f087e6d0e86b/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/6589ea9df5e4c5732121f087e6d0e86b/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.squareup:android-times-square:1.7.10] /home/szymon/.gradle/caches/transforms-2/files-2.1/7e65a190501a3ab5f46099417cae59f6/android-times-square-1.7.10/AndroidManifest.xml:7:5-43
+MERGED from [com.squareup:android-times-square:1.7.10] /home/szymon/.gradle/caches/transforms-2/files-2.1/7e65a190501a3ab5f46099417cae59f6/android-times-square-1.7.10/AndroidManifest.xml:7:5-43
+MERGED from [androidx.fragment:fragment:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/9c96e3c7610a71f64d933abf5d989c41/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/9c96e3c7610a71f64d933abf5d989c41/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/3c6026bf367a81ae0b26f6a0755e7c5c/appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/3c6026bf367a81ae0b26f6a0755e7c5c/appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/9eeb03172080be4be809eb3b789602a2/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/9eeb03172080be4be809eb3b789602a2/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/40bc7c61bac6f76d8b8baba1e6746ffa/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/40bc7c61bac6f76d8b8baba1e6746ffa/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d81313297acd4b62a12e1c4be346ea86/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d81313297acd4b62a12e1c4be346ea86/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/b403c837ac7d55e559d7b654aa580176/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/b403c837ac7d55e559d7b654aa580176/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.2.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/13dc468f7cfee2eb01713f4b7958d2e6/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/13dc468f7cfee2eb01713f4b7958d2e6/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/8042381f1240df5f98ac8c5a464644dd/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/8042381f1240df5f98ac8c5a464644dd/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/2485cb75ca766726d2f85318526894e3/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/2485cb75ca766726d2f85318526894e3/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d4d6f1b618f6740b3852fbc0a4f6708f/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d4d6f1b618f6740b3852fbc0a4f6708f/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/47bf1c1672b530aea741a2298486de75/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/47bf1c1672b530aea741a2298486de75/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f71f8da7ba118f56b7a69563a8255a28/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/f71f8da7ba118f56b7a69563a8255a28/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/6ad38dfac4e106a4ff4e5e048c9d7854/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/6ad38dfac4e106a4ff4e5e048c9d7854/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/5aa6e1ee8a4aa87ed09e4136bb1359d6/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/5aa6e1ee8a4aa87ed09e4136bb1359d6/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d5a39d8f51fcfc1b19c3ec4132b72e21/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/d5a39d8f51fcfc1b19c3ec4132b72e21/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/8be5234bafda9ab14ed7f88c9dd40d77/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/8be5234bafda9ab14ed7f88c9dd40d77/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/621e01429d79a08e6530f2907ad873bf/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/621e01429d79a08e6530f2907ad873bf/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/e05a230acf535e3dec39f0f39ed5f0ca/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/e05a230acf535e3dec39f0f39ed5f0ca/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/004fb91108e1b1927119709e2ff43030/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/004fb91108e1b1927119709e2ff43030/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/3a3ed459510bf208b94d56b861c80196/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/3a3ed459510bf208b94d56b861c80196/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/ab93a8dbadb16e1d4464b7fe897665b9/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/ab93a8dbadb16e1d4464b7fe897665b9/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/1a03c688fd0be1e0d5393144f4840983/annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /home/szymon/.gradle/caches/transforms-2/files-2.1/1a03c688fd0be1e0d5393144f4840983/annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+		ADDED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
+		INJECTED from /home/szymon/AndroidStudioProjects/ToDoListKotlin/app/src/main/AndroidManifest.xml
