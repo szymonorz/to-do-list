@@ -18,7 +18,6 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
     {
         super.onCreate(savedInstance)
         setContentView(R.layout.main_layout)
-        addItems()
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.adapter = ListAdapter(items,this)
         button.setOnClickListener {
@@ -32,12 +31,6 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
         dialog.show(supportFragmentManager,"shit")
     }
 
-    fun addItems()
-    {
-        items.add(ItemClass("Wylewsz masz","kurwo"))
-        items.add(ItemClass("Marlenka","Rafatus"))
-        items.add(ItemClass("Matka","Grzesio"))
-    }
 
     override fun applyText(name: String, scnd: String) {
         items.add(ItemClass(name,scnd))

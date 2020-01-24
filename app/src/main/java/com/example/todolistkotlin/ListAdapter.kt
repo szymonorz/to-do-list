@@ -1,9 +1,11 @@
 package com.example.todolistkotlin
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_layout.view.*
 
@@ -29,11 +31,24 @@ class ListAdapter(val items: ArrayList<ItemClass>, val context: Context): Recycl
     {
         val tvItemText = view.text
         val tvItemText2 = view.text2
+        val vRadio = view.radio
+
 
         fun bind(item: ItemClass)
         {
             tvItemText.text = item.Name
             tvItemText2.text = item.Surname
+            vRadio.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(isChecked)
+                {
+                    Log.d("bind","isChecked")
+                }else{
+                    Log.d("bind","isNotChecked")
+                }
+            }
+
         }
+
+
     }
 }

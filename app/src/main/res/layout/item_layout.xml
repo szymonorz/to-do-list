@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:layout_margin="3dp">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp"
+    app:strokeColor="@color/colorAccent"
+    app:strokeWidth="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <CheckBox
+            android:id="@+id/radio"
+            android:layout_width="wrap_content"
+            android:button="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radio_button"
+            android:layout_margin="10dp"
+            android:drawableTint="@color/colorAccent"
+            />
 
         <TextView
             android:id="@+id/text"
@@ -15,6 +29,7 @@
             android:text="Line1"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:layout_toEndOf="@+id/radio"
             />
         <TextView
             android:id="@+id/text2"
@@ -25,8 +40,9 @@
             android:textSize="20sp"
             android:textStyle="italic"
             android:layout_below="@id/text"
+            android:layout_toEndOf="@id/radio"
             />
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
