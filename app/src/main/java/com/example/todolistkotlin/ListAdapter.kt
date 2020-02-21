@@ -1,54 +1,48 @@
 package com.example.todolistkotlin
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_layout.view.*
+import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter
+import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
+import java.lang.IndexOutOfBoundsException
 
-class ListAdapter(val items: ArrayList<ItemClass>, val context: Context): RecyclerView.Adapter<ListAdapter.ViewHolder>()
+class ListAdapter(
+    groups: MutableList<out ExpandableGroup<ItemClass>>
+):
+    ExpandableRecyclerViewAdapter<DaysViewHolder, ItemViewHolder>(groups)
 {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_layout,parent,false))
+    override fun onCreateGroupViewHolder(parent: ViewGroup?, viewType: Int): DaysViewHolder {
+        val v = LayoutInflater.from(parent!!.context).inflate(R.layout.expandable_days, parent, false)
+        return DaysViewHolder(v)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+    override fun onCreateChildViewHolder(parent: ViewGroup?, viewType: Int): ItemViewHolder {
+        val v = LayoutInflater.from(parent!!.context).inflate(R.layout.item_layout, parent, false)
+        return ItemViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
-        println("bind")
+    override fun onBindChildViewHolder(
+        holder: ItemViewHolder?,
+        flatPosition: Int,
+        group: ExpandableGroup<*>?,
+        childIndex: Int
+    ) {
+        val item: ItemClass = group!!.items.get(childIndex) as ItemClass
+        holder!!.bind(item)
+
+    }
+
+    override fun onBindGroupViewHolder(
+        holder: DaysViewHolder?,
+        flatPosition: Int,
+        group: ExpandableGroup<*>?
+    ) {
+        val day: DaysClass = group as DaysClass
+        holder!!.bind(day)
+
     }
 
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view)
-    {
-        val tvItemText = view.text
-        val tvItemText2 = view.text2
-        val vRadio = view.radio
-
-
-        fun bind(item: ItemClass)
-        {
-            tvItemText.text = item.Name
-            tvItemText2.text = item.Surname
-            vRadio.setOnCheckedChangeListener { buttonView, isChecked ->
-                if(isChecked)
-                {
-                    Log.d("bind","isChecked")
-                }else{
-                    Log.d("bind","isNotChecked")
-                }
-            }
-
-        }
-
-
-    }
 }
