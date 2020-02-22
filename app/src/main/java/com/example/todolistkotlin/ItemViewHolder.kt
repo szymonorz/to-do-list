@@ -9,7 +9,6 @@ import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
 import kotlinx.android.synthetic.main.item_layout.view.*
 
 class ItemViewHolder(itemView: View?) : ChildViewHolder(itemView) {
-    private lateinit var textView: TextView
     private lateinit var  cardView: MaterialCardView
 
     val tvItemText = itemView?.text

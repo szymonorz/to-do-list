@@ -1,28 +1,37 @@
 package com.example.todolistkotlin
 
-import android.content.ClipData
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.main_layout.*
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
+import java.io.*
+import java.lang.StringBuilder
 import kotlin.collections.ArrayList
 
 class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
 
 
     private var list: ArrayList<DaysClass> = ArrayList()
+    var gson: Gson = Gson()
+    private val FILE_NAME = "task_list.txt"
 
-    val dateTimeStrToLocalDateTime: (DaysClass) -> LocalDate = {
-        LocalDate.parse(it.date, DateTimeFormatter.ofPattern("yyyy/M/dd"))
-    }
+
     override fun onCreate(savedInstance: Bundle?)
     {
         super.onCreate(savedInstance)
+        try {
+            load()
+        }catch(e: FileNotFoundException)
+        {
+            println("File not found")
+        }
+
+
         setContentView(R.layout.main_layout)
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.adapter = ListAdapter(list)
@@ -55,8 +64,8 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
             a!!.add(ItemClass(name, scnd))
         }
         list.sortWith(compareBy({ it.date }))
+        save()
         recycler_view.adapter = ListAdapter(list)
-        //recycler_view.adapter?.notifyDataSetChanged() <---- ArrayIndexOutOfBounds
     }
 
     fun isInList(name: String, list: ArrayList<DaysClass>): Int
@@ -66,6 +75,32 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
                 return list.indexOf(it)
         }
         return -1
+    }
+
+    fun save()
+    {
+        val json: String = gson.toJson(list)
+        val fos: FileOutputStream
+        fos = openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
+        fos.write(json.toByteArray())
+        Toast.makeText(this,"Saved to ${filesDir}", Toast.LENGTH_SHORT).show()
+        fos.close()
+    }
+
+    fun load()
+    {
+        Log.d(".MainActivity","Loading data")
+        val fis: FileInputStream
+        fis = openFileInput(FILE_NAME)
+        val isr = InputStreamReader(fis)
+        val br = BufferedReader(isr)
+        val sb = StringBuilder()
+        br.lineSequence().forEach {
+            sb.append(it).append("\n")
+        }
+
+        list = gson.fromJson<ArrayList<DaysClass>>(sb.toString(),object: TypeToken<ArrayList<DaysClass>>(){}.type)
+        fis.close()
     }
 
 
