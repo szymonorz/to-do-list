@@ -8,8 +8,9 @@ data class ItemClass(val Name: String?, val Surname: String?): Parcelable
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
+
+
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(Name)

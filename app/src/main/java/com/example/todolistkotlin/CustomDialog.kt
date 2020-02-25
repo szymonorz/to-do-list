@@ -37,13 +37,13 @@ class CustomDialog: AppCompatDialogFragment(){
         calendarView = view.findViewById(R.id.calendar) as CalendarView
         calendarView.minDate = System.currentTimeMillis() - 1000
         val c = Calendar.getInstance()
-        val cDate = "${c.get(Calendar.YEAR)}/${c.get(Calendar.MONTH) +1}/${c.get(Calendar.DAY_OF_MONTH)}"
+        val cDate = "${c.get(Calendar.YEAR)}-${c.get(Calendar.MONTH) +1}-${c.get(Calendar.DAY_OF_MONTH)}"
 
 
         editText2.setText(cDate)
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            var dataString = "${year}/${month+1}/${dayOfMonth}"
+            var dataString = "${year}-${month+1}-${dayOfMonth}"
             editText2.setText(dataString)
         }
 

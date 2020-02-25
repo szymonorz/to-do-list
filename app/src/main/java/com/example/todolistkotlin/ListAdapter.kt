@@ -1,17 +1,20 @@
 package com.example.todolistkotlin
 
-import android.content.Context
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
-import java.lang.IndexOutOfBoundsException
 
 class ListAdapter(
-    groups: MutableList<out ExpandableGroup<ItemClass>>
+    groups: ArrayList<DaysClass>
 ):
-    ExpandableRecyclerViewAdapter<DaysViewHolder, ItemViewHolder>(groups)
-{
+    ExpandableRecyclerViewAdapter<DaysViewHolder, ItemViewHolder>(groups){
+
+    lateinit var groups: ArrayList<DaysClass>
+    init {
+        this.groups = groups
+    }
 
     override fun onCreateGroupViewHolder(parent: ViewGroup?, viewType: Int): DaysViewHolder {
         val v = LayoutInflater.from(parent!!.context).inflate(R.layout.expandable_days, parent, false)
@@ -22,6 +25,7 @@ class ListAdapter(
         val v = LayoutInflater.from(parent!!.context).inflate(R.layout.item_layout, parent, false)
         return ItemViewHolder(v)
     }
+
 
     override fun onBindChildViewHolder(
         holder: ItemViewHolder?,
