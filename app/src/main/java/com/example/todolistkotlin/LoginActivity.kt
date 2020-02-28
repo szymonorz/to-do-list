@@ -2,7 +2,6 @@ package com.example.todolistkotlin
 
 import android.app.Activity
 import android.content.Intent
-import android.net.wifi.p2p.WifiP2pManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,7 +13,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -26,6 +24,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
     private val REQUEST_SIGN_IN_GOOGLE = 101
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -46,7 +45,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
     private fun changeActivity(user: FirebaseUser)
     {
         val i: Intent = Intent(this,MainActivity::class.java)
-        i.putExtra("User", user)
         startActivity(i)
         finish()
     }

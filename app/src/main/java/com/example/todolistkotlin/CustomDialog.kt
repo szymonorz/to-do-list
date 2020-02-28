@@ -1,22 +1,14 @@
 package com.example.todolistkotlin
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.CalendarView
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
-import kotlinx.android.synthetic.main.dialog_layout.*
-import com.example.todolistkotlin.MainActivity
 import com.google.android.material.textfield.TextInputEditText
-import java.text.DateFormat
 import java.util.*
 
 class CustomDialog: AppCompatDialogFragment(){
@@ -25,26 +17,38 @@ class CustomDialog: AppCompatDialogFragment(){
     lateinit var dialogListener: CustomDialogListener
 
     lateinit var editText2: TextInputEditText
+    lateinit var data: TextInputEditText
     lateinit var calendarView: CalendarView
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = AlertDialog.Builder(activity)
         val inflater = activity?.layoutInflater
         val view = inflater?.inflate(R.layout.dialog_layout, null)
-        val editText = view?.findViewById(R.id.editText) as TextInputEditText
-        editText2 = view.findViewById(R.id.editText2) as TextInputEditText
+        val editText = view?.findViewById(R.id.title) as TextInputEditText
+        editText2 = view.findViewById(R.id.description) as TextInputEditText
+        data = view.findViewById(R.id.editText2)
 
         calendarView = view.findViewById(R.id.calendar) as CalendarView
         calendarView.minDate = System.currentTimeMillis() - 1000
         val c = Calendar.getInstance()
-        val cDate = "${c.get(Calendar.YEAR)}-${c.get(Calendar.MONTH) +1}-${c.get(Calendar.DAY_OF_MONTH)}"
+        lateinit var cDate: String
+        if (c.get(Calendar.MONTH) + 1 < 10)
+            cDate =
+                "${c.get(Calendar.YEAR)}-0${c.get(Calendar.MONTH) + 1}-${c.get(Calendar.DAY_OF_MONTH)}"
+        else
+            cDate =
+                "${c.get(Calendar.YEAR)}-${c.get(Calendar.MONTH) + 1}-${c.get(Calendar.DAY_OF_MONTH)}"
 
 
-        editText2.setText(cDate)
+        data.setText(cDate)
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            var dataString = "${year}-${month+1}-${dayOfMonth}"
-            editText2.setText(dataString)
+            lateinit var dateString: String
+            if (month + 1 < 10)
+                dateString = "${year}-0${month + 1}-${dayOfMonth}"
+            else
+                dateString = "${year}-${month + 1}-${dayOfMonth}"
+            data.setText(dateString)
         }
 
         dialog.setView(view)
@@ -55,9 +59,10 @@ class CustomDialog: AppCompatDialogFragment(){
                     Toast.makeText(activity, "CANCEL", Toast.LENGTH_LONG).show()
                 })
             .setPositiveButton("Send", DialogInterface.OnClickListener { dialog, which ->
-                val name = editText.text.toString()
-                val name2 = editText2.text.toString()
-                dialogListener.applyText(name, name2)
+                val title = editText.text.toString()
+                val description = editText2.text.toString()
+                val date = data.text.toString()
+                dialogListener.applyText(title, description, date)
                 Toast.makeText(activity, "SEND", Toast.LENGTH_LONG).show()
             })
 
@@ -70,7 +75,7 @@ class CustomDialog: AppCompatDialogFragment(){
     }
 
     interface CustomDialogListener {
-        fun applyText(name: String, scnd: String)
+        fun applyText(title: String, description: String, date: String)
     }
 
 

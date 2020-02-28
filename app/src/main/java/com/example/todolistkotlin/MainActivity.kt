@@ -1,32 +1,33 @@
 package com.example.todolistkotlin
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.widget.Toolbar
+import com.example.todolistkotlin.adapter.ExpandableListViewAdapter
+import com.example.todolistkotlin.model.DaysClass
+import com.example.todolistkotlin.model.ItemClass
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.main_layout.*
-import java.io.*
-import java.lang.Exception
-import java.lang.StringBuilder
-import kotlin.collections.ArrayList
 
 class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
 
 
     var list: ArrayList<DaysClass> = ArrayList()
+    lateinit var adapter: ExpandableListViewAdapter
     var gson = GsonBuilder().setPrettyPrinting().create()
     private val FILE_NAME = "task_list.txt"
     val mAuth = FirebaseAuth.getInstance()
     val reference = FirebaseDatabase.getInstance().reference
-
 
 
     override fun onCreate(savedInstance: Bundle?)
@@ -35,12 +36,38 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
 
         load()
         setContentView(R.layout.main_layout)
-        recycler_view.setLayoutManager(LinearLayoutManager(this))
-        recycler_view.setAdapter(ListAdapter(list))
 
+//        val temp: ArrayList<ItemClass?>? = ArrayList<ItemClass?>()
+//        temp!!.add(ItemClass("łeee","eeee","2137"))
+//        val day = DaysClass("2137",temp)
+//        list.add(day)
+//        Log.d("MainActivity",list.toString())
+        adapter = ExpandableListViewAdapter(this, list)
+
+        expandable_view.setAdapter(adapter)
+        val toolbar: Toolbar? = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
         button.setOnClickListener {
             openDialog()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.sign_out -> {
+                FirebaseAuth.getInstance().signOut()
+                val i = Intent(this, LoginActivity::class.java)
+                startActivity(i)
+                finish()
+                true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun openDialog()
@@ -50,21 +77,27 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
     }
 
 
-    override fun applyText(name: String, scnd: String) {
+    override fun applyText(title: String, description: String, date: String) {
 
         val temp = ArrayList(list)
-        val index: Int = isInList(scnd, list)
+        val index: Int = isInList(date, list)
         lateinit var d: DaysClass
         var position: Int = 0
         if(index < 0)
         {
             val array: ArrayList<ItemClass?> = ArrayList()
-            array.add(ItemClass(name,scnd))
+            array.add(
+                ItemClass(
+                    title,
+                    description,
+                    date
+                )
+            )
             println(array)
-            d = DaysClass(scnd, array)
+            d = DaysClass(date, array)
             println(d)
             list.add(0,d)
-            list.sortWith(compareBy({ it.date }))
+            list.sortBy { it.date }
             position = list.indexOf(d)
 
         }
@@ -72,14 +105,21 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
         {
             val temp: ArrayList<DaysClass> = ArrayList(list)
             val a: ArrayList<ItemClass?>? = temp.get(index).itemClass
-            a!!.add(0,ItemClass(name, scnd))
+            a!!.add(
+                0,
+                ItemClass(
+                    title,
+                    description,
+                    date
+                )
+            )
             list = temp
-            list.sortWith(compareBy({ it.date }))
+            list.sortBy { it.date }
             position = index
 
         }
         save(position)
-        recycler_view.adapter = ListAdapter(list)
+        adapter.notifyDataSetChanged()
     }
 
     fun isInList(name: String, list: ArrayList<DaysClass>): Int
@@ -107,22 +147,31 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
 
     fun load()
     {
+        val l = ArrayList<DaysClass>()
         Log.d(".MainActivity","Loading data")
         reference.child(mAuth.currentUser!!.uid).addValueEventListener(object: ValueEventListener
         {
             override fun onDataChange(p0: DataSnapshot) {
-
-                val l = ArrayList<DaysClass>()
+                list.clear()
                 p0.children.forEach {
                     val arr = ArrayList<ItemClass?>()
                     it.children.forEach {
-                        val i = ItemClass(it.child("name").value.toString(),it.child("surname").value.toString())
+                        val i = ItemClass(
+                            it.child("title").value.toString(),
+                            it.child("description").value.toString(),
+                            it.child("date").value.toString()
+                        )
                         arr.add(i)
+                        Log.d("Loading", "Loaded")
                     }
-                    l.add(DaysClass(it.key, arr))
+                    list.add(
+                        DaysClass(
+                            it.key,
+                            arr
+                        )
+                    )
                 }
-                list = ArrayList(l)
-                recycler_view.adapter = ListAdapter(list)
+                adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(p0: DatabaseError) {

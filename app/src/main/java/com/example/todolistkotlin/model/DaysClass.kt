@@ -1,4 +1,4 @@
-package com.example.todolistkotlin
+package com.example.todolistkotlin.model
 
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
 
