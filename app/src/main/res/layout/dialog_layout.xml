@@ -2,14 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:id="@+id/linear">
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent">
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:contentDescription="Close Dialog"
+            android:src="@drawable/close" />
+
+        <ImageButton
+            android:id="@+id/apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/colorAccent"
+            android:contentDescription="Apply"
+            android:src="@drawable/check" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <include layout="@layout/calendar_layout"/>
     <TextView
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Zadanie"/>
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -22,11 +47,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Opis" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="3dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -41,10 +68,12 @@
 
     </com.google.android.material.textfield.TextInputLayout>
     <TextView
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Data"/>
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">

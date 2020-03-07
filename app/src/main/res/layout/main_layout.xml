@@ -4,18 +4,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main">
+    android:id="@+id/main"
+    android:background="#e0e0e0">
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/relative"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:minHeight="?attr/actionBarSize" />
+            android:background="@color/colorAccent"
+            android:minHeight="?attr/actionBarSize"
+            app:titleTextColor="#fff" />
 
         <ExpandableListView
             android:id="@+id/expandable_view"
@@ -23,7 +26,6 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
             android:clipToPadding="false"
-            android:padding="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -34,7 +36,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="30dp"
         android:backgroundTint="@color/colorAccent"
         android:src="@drawable/plus" />

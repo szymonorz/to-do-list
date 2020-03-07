@@ -5,12 +5,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.todolistkotlin.adapter.ExpandableListViewAdapter
+import com.example.todolistkotlin.interfaces.FullscreenDialogInterface
 import com.example.todolistkotlin.model.DaysClass
 import com.example.todolistkotlin.model.ItemClass
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,7 +27,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.main_layout.*
 
-class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
+class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
 
 
     var list: ArrayList<DaysClass> = ArrayList()
@@ -28,6 +36,10 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
     private val FILE_NAME = "task_list.txt"
     val mAuth = FirebaseAuth.getInstance()
     val reference = FirebaseDatabase.getInstance().reference
+    lateinit var relativeLayout: RelativeLayout
+    lateinit var container: ViewGroup
+    lateinit var gso: GoogleSignInOptions
+    lateinit var mGoogleSignInClient: GoogleSignInClient
 
 
     override fun onCreate(savedInstance: Bundle?)
@@ -36,14 +48,15 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
 
         load()
         setContentView(R.layout.main_layout)
+        container = findViewById(android.R.id.content)
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
 
-//        val temp: ArrayList<ItemClass?>? = ArrayList<ItemClass?>()
-//        temp!!.add(ItemClass("łeee","eeee","2137"))
-//        val day = DaysClass("2137",temp)
-//        list.add(day)
-//        Log.d("MainActivity",list.toString())
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         adapter = ExpandableListViewAdapter(this, list)
-
+        relativeLayout = findViewById(R.id.relative)
         expandable_view.setAdapter(adapter)
         val toolbar: Toolbar? = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -57,14 +70,21 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
         return super.onCreateOptionsMenu(menu)
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.sign_out -> {
                 FirebaseAuth.getInstance().signOut()
-                val i = Intent(this, LoginActivity::class.java)
-                startActivity(i)
-                finish()
-                true
+                mGoogleSignInClient.signOut()
+                    .addOnCompleteListener(this, object : OnCompleteListener<Void> {
+                        override fun onComplete(task: Task<Void>) {
+                            val i = Intent(applicationContext, LoginActivity::class.java)
+
+                            startActivity(i)
+                            finish()
+                        }
+                    })
+
             }
         }
         return super.onOptionsItemSelected(item)
@@ -72,8 +92,9 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
 
     fun openDialog()
     {
-        val dialog = CustomDialog()
+        val dialog = FullscreenDialog()
         dialog.show(supportFragmentManager,"h")
+
     }
 
 
@@ -179,7 +200,5 @@ class MainActivity: AppCompatActivity(), CustomDialog.CustomDialogListener{
             }
         })
     }
-
-
 
 }

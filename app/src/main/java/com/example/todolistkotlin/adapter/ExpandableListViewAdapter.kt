@@ -45,7 +45,7 @@ class ExpandableListViewAdapter(ctx: Context, groups: List<DaysClass>) :
             _converterView = layoutInflater.inflate(R.layout.expandable_days, null)
         }
         val dateText = _converterView!!.findViewById<TextView>(R.id.title)
-        dateText.setText(Title)
+        dateText.text = Title
 
         return _converterView
     }
@@ -79,8 +79,8 @@ class ExpandableListViewAdapter(ctx: Context, groups: List<DaysClass>) :
         }
         val todoView = _converterView!!.findViewById<TextView>(R.id.text)
         val descriptionView = _converterView.findViewById<TextView>(R.id.text2)
-        todoView.setText(todo)
-        descriptionView.setText(description)
+        todoView.text = todo
+        descriptionView.text = description
 
         return _converterView
     }
