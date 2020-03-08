@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.todolistkotlin.adapter.ExpandableListViewAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.todolistkotlin.adapter.DayRecyclerViewAdapter
 import com.example.todolistkotlin.interfaces.FullscreenDialogInterface
 import com.example.todolistkotlin.model.DaysClass
 import com.example.todolistkotlin.model.ItemClass
@@ -31,7 +33,9 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
 
 
     var list: ArrayList<DaysClass> = ArrayList()
-    lateinit var adapter: ExpandableListViewAdapter
+
+    //lateinit var adapter: ExpandableListViewAdapter
+    lateinit var recyclerAdapter: DayRecyclerViewAdapter
     var gson = GsonBuilder().setPrettyPrinting().create()
     private val FILE_NAME = "task_list.txt"
     val mAuth = FirebaseAuth.getInstance()
@@ -55,9 +59,15 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
             .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        adapter = ExpandableListViewAdapter(this, list)
+        recyclerAdapter = DayRecyclerViewAdapter(list)
         relativeLayout = findViewById(R.id.relative)
-        expandable_view.setAdapter(adapter)
+        val linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        linearLayoutManager.reverseLayout = true
+        expandable_view.apply {
+            layoutManager = linearLayoutManager
+            adapter = recyclerAdapter
+
+        }
         val toolbar: Toolbar? = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         button.setOnClickListener {
@@ -100,13 +110,12 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
 
     override fun applyText(title: String, description: String, date: String) {
 
-        val temp = ArrayList(list)
         val index: Int = isInList(date, list)
         lateinit var d: DaysClass
         var position: Int = 0
         if(index < 0)
         {
-            val array: ArrayList<ItemClass?> = ArrayList()
+            val array: ArrayList<ItemClass> = ArrayList()
             array.add(
                 ItemClass(
                     title,
@@ -114,9 +123,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                     date
                 )
             )
-            println(array)
             d = DaysClass(date, array)
-            println(d)
             list.add(0,d)
             list.sortBy { it.date }
             position = list.indexOf(d)
@@ -124,9 +131,8 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
         }
         else
         {
-            val temp: ArrayList<DaysClass> = ArrayList(list)
-            val a: ArrayList<ItemClass?>? = temp.get(index).itemClass
-            a!!.add(
+            val a: ArrayList<ItemClass> = list.get(index).itemClass
+            a.add(
                 0,
                 ItemClass(
                     title,
@@ -134,13 +140,12 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                     date
                 )
             )
-            list = temp
             list.sortBy { it.date }
             position = index
 
         }
         save(position)
-        adapter.notifyDataSetChanged()
+        recyclerAdapter.notifyDataSetChanged()
     }
 
     fun isInList(name: String, list: ArrayList<DaysClass>): Int
@@ -168,14 +173,13 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
 
     fun load()
     {
-        val l = ArrayList<DaysClass>()
         Log.d(".MainActivity","Loading data")
         reference.child(mAuth.currentUser!!.uid).addValueEventListener(object: ValueEventListener
         {
             override fun onDataChange(p0: DataSnapshot) {
                 list.clear()
                 p0.children.forEach {
-                    val arr = ArrayList<ItemClass?>()
+                    val arr = ArrayList<ItemClass>()
                     it.children.forEach {
                         val i = ItemClass(
                             it.child("title").value.toString(),
@@ -192,11 +196,11 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                         )
                     )
                 }
-                adapter.notifyDataSetChanged()
+                recyclerAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                println(p0.message)
+                Log.d("onCncelled", p0.message)
             }
         })
     }

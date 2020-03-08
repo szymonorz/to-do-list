@@ -16,7 +16,7 @@
 
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/itemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
@@ -25,14 +25,14 @@
             android:textStyle="bold"
             />
         <TextView
-            android:id="@+id/text2"
+            android:id="@+id/itemDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#555"
             android:text="Line2"
             android:textSize="20sp"
             android:textStyle="italic"
-            android:layout_below="@id/text"
+            android:layout_below="@id/itemTitle"
             />
 
     </RelativeLayout>
