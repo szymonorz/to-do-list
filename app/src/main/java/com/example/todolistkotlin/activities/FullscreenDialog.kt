@@ -1,4 +1,4 @@
-package com.example.todolistkotlin
+package com.example.todolistkotlin.activities
 
 import android.content.Context
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.CalendarView
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
+import com.example.todolistkotlin.R
 import com.example.todolistkotlin.interfaces.FullscreenDialogInterface
 import java.util.*
 
@@ -22,7 +23,10 @@ class FullscreenDialog : DialogFragment(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
+        setStyle(
+            DialogFragment.STYLE_NORMAL,
+            R.style.AppTheme
+        )
 
     }
 
@@ -42,21 +46,36 @@ class FullscreenDialog : DialogFragment(), View.OnClickListener {
         val applyButton = _view.findViewById<ImageButton>(R.id.apply)
         applyButton.setOnClickListener(this)
         val c = Calendar.getInstance()
-        lateinit var cDate: String
-        if (c.get(Calendar.MONTH) + 1 < 10)
-            cDate =
-                "${c.get(Calendar.YEAR)}-0${c.get(Calendar.MONTH) + 1}-${c.get(Calendar.DAY_OF_MONTH)}"
-        else
-            cDate =
-                "${c.get(Calendar.YEAR)}-${c.get(Calendar.MONTH) + 1}-${c.get(Calendar.DAY_OF_MONTH)}"
-
+        var cDate = "${c.get(Calendar.YEAR)}"
+        if (c.get(Calendar.MONTH) + 1 < 10) {
+            cDate += "-0${c.get(Calendar.MONTH) + 1}-"
+            if (c.get(Calendar.DAY_OF_MONTH) < 10)
+                cDate += "0${c.get(Calendar.DAY_OF_MONTH)}"
+            else
+                cDate += "${c.get(Calendar.DAY_OF_MONTH)}"
+        } else {
+            cDate += "-${c.get(Calendar.MONTH) + 1}-"
+            if (c.get(Calendar.DAY_OF_MONTH) < 10)
+                cDate += "0${c.get(Calendar.DAY_OF_MONTH)}"
+            else
+                cDate += "${c.get(Calendar.DAY_OF_MONTH)}"
+        }
         dateEditText.setText(cDate)
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            lateinit var dateString: String
-            if (month + 1 < 10)
-                dateString = "${year}-0${month + 1}-${dayOfMonth}"
-            else
-                dateString = "${year}-${month + 1}-${dayOfMonth}"
+            var dateString = "${year}"
+            if (month + 1 < 10) {
+                dateString += "-0${month + 1}"
+                if (dayOfMonth < 10)
+                    dateString += "-0${dayOfMonth}"
+                else
+                    dateString += "-${dayOfMonth}"
+            } else {
+                dateString += "-${month + 1}"
+                if (dayOfMonth < 10)
+                    dateString += "-0${dayOfMonth}"
+                else
+                    dateString += "-${dayOfMonth}"
+            }
             dateEditText.setText(dateString)
         }
 

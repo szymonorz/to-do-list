@@ -1,16 +1,21 @@
-package com.example.todolistkotlin
+package com.example.todolistkotlin.activities
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.webkit.MimeTypeMap
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolistkotlin.R
 import com.example.todolistkotlin.adapter.DayRecyclerViewAdapter
 import com.example.todolistkotlin.interfaces.FullscreenDialogInterface
 import com.example.todolistkotlin.model.DaysClass
@@ -27,19 +32,24 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.main_layout.*
+import java.io.BufferedReader
+import java.io.FileOutputStream
+import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
 
 
     var list: ArrayList<DaysClass> = ArrayList()
 
-    //lateinit var adapter: ExpandableListViewAdapter
     lateinit var recyclerAdapter: DayRecyclerViewAdapter
-    var gson = GsonBuilder().setPrettyPrinting().create()
-    private val FILE_NAME = "task_list.txt"
-    val mAuth = FirebaseAuth.getInstance()
-    val reference = FirebaseDatabase.getInstance().reference
+    private var gson = GsonBuilder().create()
+    private val FILE_NAME = "task_list.json"
+    private val FILE_SELECT = 100
+    private val FILE_CREATE = 101
+    private val mAuth = FirebaseAuth.getInstance()
+    private val reference = FirebaseDatabase.getInstance().reference
     lateinit var relativeLayout: RelativeLayout
     lateinit var container: ViewGroup
     lateinit var gso: GoogleSignInOptions
@@ -51,6 +61,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
         super.onCreate(savedInstance)
 
         load()
+        Log.d("a", list.toString())
         setContentView(R.layout.main_layout)
         container = findViewById(android.R.id.content)
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -63,6 +74,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
         relativeLayout = findViewById(R.id.relative)
         val linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
         expandable_view.apply {
             layoutManager = linearLayoutManager
             adapter = recyclerAdapter
@@ -94,13 +106,36 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                             finish()
                         }
                     })
-
             }
+
+            R.id.upload -> chooseJson()
+            R.id.download -> toJsonFile()
+
         }
         return super.onOptionsItemSelected(item)
     }
 
-    fun openDialog()
+
+    private fun chooseJson() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+
+        startActivityForResult(Intent.createChooser(intent, "Select the json file"), FILE_SELECT)
+    }
+
+    private fun toJsonFile() {
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+            putExtra(Intent.EXTRA_TITLE, FILE_NAME)
+        }
+
+        startActivityForResult(intent, FILE_CREATE)
+
+    }
+
+    private fun openDialog()
     {
         val dialog = FullscreenDialog()
         dialog.show(supportFragmentManager,"h")
@@ -171,10 +206,32 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
             })
     }
 
+    fun deleteList() {
+        reference.child(mAuth.currentUser!!.uid).removeValue()
+    }
+
+    fun saveList() {
+        deleteList()
+        list.forEach { day ->
+            reference.child(mAuth.currentUser!!.uid)
+                .child(day.date.toString())
+                .setValue(day.itemClass)
+                .addOnFailureListener(object : OnFailureListener {
+                    override fun onFailure(p0: Exception) {
+                        Log.d(".MainAcitivty", p0.printStackTrace().toString())
+                    }
+                })
+
+        }
+
+    }
+
     fun load()
     {
         Log.d(".MainActivity","Loading data")
-        reference.child(mAuth.currentUser!!.uid).addValueEventListener(object: ValueEventListener
+        ArrayList<DaysClass>()
+        reference.child(mAuth.currentUser!!.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener
         {
             override fun onDataChange(p0: DataSnapshot) {
                 list.clear()
@@ -203,6 +260,58 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                 Log.d("onCncelled", p0.message)
             }
         })
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            FILE_SELECT -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val stringBuilder = StringBuilder()
+                    val uri = data!!.data as Uri
+                    val mimeType = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
+                    Log.d("MimeType", mimeType)
+                    if (mimeType.contains("json")) {
+                        contentResolver.openInputStream(uri)?.use {
+                            BufferedReader(InputStreamReader(it)).use { reader ->
+                                var line = reader.readLine()
+                                while (line != null) {
+                                    stringBuilder.append(line)
+                                    line = reader.readLine()
+                                }
+                            }
+                        }
+                        val result = stringBuilder.toString()
+                        Log.d("ReadJso", result)
+                        val temp: ArrayList<DaysClass> = gson.fromJson(result,
+                            object : TypeToken<ArrayList<DaysClass>>() {}.type)
+                        list.clear()
+                        recyclerAdapter.notifyDataSetChanged()
+                        temp.forEach { day ->
+                            list.add(day)
+                        }
+                        saveList()
+                        Log.d("List", list.toString())
+                        load()
+
+                    }
+                }
+            }
+
+            FILE_CREATE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val uri = data!!.data as Uri
+                    contentResolver.openFileDescriptor(uri, "w")?.use {
+                        FileOutputStream(it.fileDescriptor).use {
+                            it.write(gson.toJson(list).toByteArray())
+                        }
+                    }
+                    Toast.makeText(this, uri.path, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }

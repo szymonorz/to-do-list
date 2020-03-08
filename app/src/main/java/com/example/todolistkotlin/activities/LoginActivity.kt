@@ -1,4 +1,4 @@
-package com.example.todolistkotlin
+package com.example.todolistkotlin.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.todolistkotlin.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -44,7 +45,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
 
     private fun changeActivity(user: FirebaseUser)
     {
-        val i: Intent = Intent(this,MainActivity::class.java)
+        val i: Intent = Intent(this, MainActivity::class.java)
         startActivity(i)
         finish()
     }

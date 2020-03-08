@@ -1,5 +1,6 @@
 package com.example.todolistkotlin.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ class DayRecyclerViewAdapter(days: ArrayList<DaysClass>) :
     RecyclerView.Adapter<DayRecyclerViewAdapter.DayViewHolder>() {
     private val days = days
     private val viewPool = RecyclerView.RecycledViewPool()
-
+    lateinit var itemAdapter: ItemAdapter
 
     inner class DayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title = itemView.title
@@ -33,13 +34,16 @@ class DayRecyclerViewAdapter(days: ArrayList<DaysClass>) :
     override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
         val day = days.get(position)
         holder.title.text = day.date
+        itemAdapter = ItemAdapter(day.itemClass)
         val lManager = LinearLayoutManager(holder.item_view.context, RecyclerView.VERTICAL, false)
         holder.item_view.apply {
             layoutManager = lManager
-            adapter = ItemAdapter(day.itemClass)
+            adapter = itemAdapter
             setRecycledViewPool(viewPool)
 
         }
+
+        Log.d("ViewHolder", "bind")
 
     }
 
