@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.todolistkotlin.R
 import com.example.todolistkotlin.interfaces.FullscreenDialogInterface
@@ -88,8 +89,12 @@ class FullscreenDialog : DialogFragment(), View.OnClickListener {
         val title = titleEditText.text.toString()
         val description = descriptionEditText.text.toString()
         val date = dateEditText.text.toString()
-        dialogInterface.applyText(title, description, date, false)
-        dismiss()
+        if (title.isEmpty() || description.isEmpty()) {
+            Toast.makeText(requireContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show()
+        } else {
+            dialogInterface.applyText(title, description, date, false)
+            dismiss()
+        }
     }
 
     override fun onAttach(context: Context) {
