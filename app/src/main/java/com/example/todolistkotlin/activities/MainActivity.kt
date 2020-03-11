@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
     }
 
 
-    override fun applyText(title: String, description: String, date: String) {
+    override fun applyText(title: String, description: String, date: String, checked: Boolean) {
 
         val index: Int = isInList(date, list)
         lateinit var d: DaysClass
@@ -241,7 +241,8 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                         val i = ItemClass(
                             it.child("title").value.toString(),
                             it.child("description").value.toString(),
-                            it.child("date").value.toString()
+                            it.child("date").value.toString(),
+                            it.child("checked").value.toString().toBoolean()
                         )
                         arr.add(i)
                         Log.d("Loading", "Loaded")
@@ -283,8 +284,13 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                         }
                         val result = stringBuilder.toString()
                         Log.d("ReadJso", result)
-                        val temp: ArrayList<DaysClass> = gson.fromJson(result,
-                            object : TypeToken<ArrayList<DaysClass>>() {}.type)
+                        lateinit var temp: ArrayList<DaysClass>
+                        temp = gson.fromJson(
+                            result,
+                            object : TypeToken<ArrayList<DaysClass>>() {}.type
+                        )
+                        Toast.makeText(this, "Wrong file. Can't parse JSON", Toast.LENGTH_LONG)
+                            .show()
                         list.clear()
                         recyclerAdapter.notifyDataSetChanged()
                         temp.forEach { day ->

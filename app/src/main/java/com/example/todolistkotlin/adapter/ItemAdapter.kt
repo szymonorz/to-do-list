@@ -3,9 +3,12 @@ package com.example.todolistkotlin.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistkotlin.R
 import com.example.todolistkotlin.model.ItemClass
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.item_layout.view.*
 
 class ItemAdapter(items: ArrayList<ItemClass>) :
@@ -15,6 +18,7 @@ class ItemAdapter(items: ArrayList<ItemClass>) :
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemTitle = itemView.itemTitle
         val description = itemView.itemDescription
+        val checkbox = itemView.checkbox
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -26,9 +30,32 @@ class ItemAdapter(items: ArrayList<ItemClass>) :
         return items.size
     }
 
+    fun getItem(position: Int): ItemClass {
+        return items.get(position)
+    }
+
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = items.get(position)
         holder.itemTitle.text = item.Title
         holder.description.text = item.Description
+        holder.checkbox.isChecked = item.checked
+        if (holder.checkbox.isChecked)
+            holder.checkbox.setBackgroundResource(R.drawable.checked)
+        holder.checkbox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                buttonView.setBackgroundResource(R.drawable.checked)
+                updateDatabaseChecked(position, "true")
+            } else {
+                buttonView.setBackgroundResource(R.drawable.unchecked)
+                updateDatabaseChecked(position, "false")
+            }
+        })
+    }
+
+    private fun updateDatabaseChecked(position: Int, value: String) {
+        val reference = FirebaseDatabase.getInstance().reference
+        val mAuth = FirebaseAuth.getInstance()
+        reference.child(mAuth.uid as String).child(getItem(position).Date as String)
+            .child((position).toString()).child("checked").setValue(value)
     }
 }

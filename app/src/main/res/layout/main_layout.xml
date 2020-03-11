@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:minHeight="?attr/actionBarSize"
+            android:foregroundTint="#fff"
             app:titleTextColor="#fff" />
 
         <androidx.recyclerview.widget.RecyclerView

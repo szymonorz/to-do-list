@@ -3,12 +3,18 @@ package com.example.todolistkotlin.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class ItemClass(val Title: String?, val Description: String?, val Date: String?) : Parcelable
+data class ItemClass(
+    val Title: String?,
+    val Description: String?,
+    val Date: String?,
+    val checked: Boolean = false
+) : Parcelable
 {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readString()!!.toBoolean()
     )
 
 

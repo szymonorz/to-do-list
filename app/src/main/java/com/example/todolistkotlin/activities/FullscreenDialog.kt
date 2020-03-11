@@ -88,7 +88,7 @@ class FullscreenDialog : DialogFragment(), View.OnClickListener {
         val title = titleEditText.text.toString()
         val description = descriptionEditText.text.toString()
         val date = dateEditText.text.toString()
-        dialogInterface.applyText(title, description, date)
+        dialogInterface.applyText(title, description, date, false)
         dismiss()
     }
 
