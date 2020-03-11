@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.example.todolistkotlin.R
 import com.example.todolistkotlin.activities.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.material.button.MaterialButton
@@ -22,6 +23,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private val REQUEST_SIGN_IN_GOOGLE = 101
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +33,14 @@ class LoginFragment : Fragment(), View.OnClickListener {
         val convertView = inflater.inflate(R.layout.login_fragment, container, false)
         convertView.register.setOnClickListener(this)
         mAuth = FirebaseAuth.getInstance()
+        val gso: GoogleSignInOptions =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+        googleSignInClient.signOut()
+
         val googleButton: SignInButton = convertView.findViewById(R.id.sign_google)
         googleButton.setOnClickListener(this)
         val loginButton = convertView.findViewById<MaterialButton>(R.id.sign_email)
@@ -41,15 +51,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun signInGoogle() {
-        val gso: GoogleSignInOptions =
-            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-        val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         val intent = googleSignInClient.signInIntent
-        startActivityForResult(intent, REQUEST_SIGN_IN_GOOGLE)
+        activity!!.startActivityForResult(intent, REQUEST_SIGN_IN_GOOGLE)
     }
 
     private fun authWithEmailAndPassword(email: String, password: String) {

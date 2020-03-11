@@ -3,13 +3,13 @@ package com.example.todolistkotlin.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todolistkotlin.R
 import com.example.todolistkotlin.fragments.LoginFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +20,6 @@ class LoginActivity : AppCompatActivity()
 
 
     private val REQUEST_SIGN_IN_GOOGLE = 101
-    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
 
 
@@ -37,7 +36,7 @@ class LoginActivity : AppCompatActivity()
 
     private fun changeActivity()
     {
-        val i: Intent = Intent(this, MainActivity::class.java)
+        val i = Intent(this, MainActivity::class.java)
         startActivity(i)
         finish()
     }
@@ -66,6 +65,7 @@ class LoginActivity : AppCompatActivity()
     private fun authWithGoogle(account: GoogleSignInAccount)
     {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        Log.d("LoginGoogle", "authWithGoogle")
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener(this){
                 task ->
