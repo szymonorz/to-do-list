@@ -42,14 +42,16 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
 
 
     var list: ArrayList<DaysClass> = ArrayList()
-
     lateinit var recyclerAdapter: DayRecyclerViewAdapter
     private var gson = GsonBuilder().create()
     private val FILE_NAME = "task_list.json"
     private val FILE_SELECT = 100
     private val FILE_CREATE = 101
     private val mAuth = FirebaseAuth.getInstance()
-    private val reference = FirebaseDatabase.getInstance().reference
+
+    companion object
+
+    var reference = FirebaseDatabase.getInstance().reference
     lateinit var relativeLayout: RelativeLayout
     lateinit var container: ViewGroup
     lateinit var gso: GoogleSignInOptions
@@ -64,13 +66,13 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
         Log.d("a", list.toString())
         setContentView(R.layout.main_layout)
         container = findViewById(android.R.id.content)
+        recyclerAdapter = DayRecyclerViewAdapter(list)
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        recyclerAdapter = DayRecyclerViewAdapter(list)
         relativeLayout = findViewById(R.id.relative)
         val linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         linearLayoutManager.reverseLayout = true
@@ -153,6 +155,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
             val array: ArrayList<ItemClass> = ArrayList()
             array.add(
                 ItemClass(
+                    array.size.toString(),
                     title,
                     description,
                     date
@@ -170,6 +173,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
             a.add(
                 0,
                 ItemClass(
+                    a.size.toString(),
                     title,
                     description,
                     date
@@ -223,6 +227,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                 })
 
         }
+        recyclerAdapter.notifyDataSetChanged()
 
     }
 
@@ -231,14 +236,15 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
         Log.d(".MainActivity","Loading data")
         ArrayList<DaysClass>()
         reference.child(mAuth.currentUser!!.uid)
-            .addListenerForSingleValueEvent(object : ValueEventListener
+            .addValueEventListener(object : ValueEventListener
         {
             override fun onDataChange(p0: DataSnapshot) {
                 list.clear()
-                p0.children.forEach {
+                p0.children.forEach { items ->
                     val arr = ArrayList<ItemClass>()
-                    it.children.forEach {
+                    items.children.forEach {
                         val i = ItemClass(
+                            it.key.toString(),
                             it.child("title").value.toString(),
                             it.child("description").value.toString(),
                             it.child("date").value.toString(),
@@ -249,17 +255,19 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                     }
                     list.add(
                         DaysClass(
-                            it.key,
+                            items.key,
                             arr
                         )
                     )
+                    Log.d("Load", list.toString())
+                    recyclerAdapter.notifyDataSetChanged()
                 }
-                recyclerAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(p0: DatabaseError) {
                 Log.d("onCncelled", p0.message)
             }
+
         })
 
     }
@@ -289,8 +297,6 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                             result,
                             object : TypeToken<ArrayList<DaysClass>>() {}.type
                         )
-                        Toast.makeText(this, "Wrong file. Can't parse JSON", Toast.LENGTH_LONG)
-                            .show()
                         list.clear()
                         recyclerAdapter.notifyDataSetChanged()
                         temp.forEach { day ->

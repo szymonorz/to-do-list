@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
@@ -25,7 +26,7 @@
         <TextView
             android:layout_toEndOf="@id/checkbox"
             android:id="@+id/itemTitle"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:textColor="#000"
             android:text="Line1"
@@ -35,7 +36,7 @@
         <TextView
             android:layout_toEndOf="@id/checkbox"
             android:id="@+id/itemDescription"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:textColor="#555"
             android:text="Line2"
@@ -43,6 +44,16 @@
             android:textStyle="italic"
             android:layout_below="@id/itemTitle"
             />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@id/itemTitle"
+            android:background="@drawable/delete"
+            android:clickable="true"
+            android:contentDescription="delete"
+            android:foregroundTint="@color/colorAccent" />
 
     </RelativeLayout>
 

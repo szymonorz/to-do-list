@@ -4,13 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ItemClass(
-    val Title: String?,
-    val Description: String?,
-    val Date: String?,
-    val checked: Boolean = false
+    var Id: String?,
+    var Title: String?,
+    var Description: String?,
+    var Date: String?,
+    var checked: Boolean = false
 ) : Parcelable
 {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
