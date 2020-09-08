@@ -265,7 +265,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                Log.d("onCncelled", p0.message)
+                Log.d("onCancelled", p0.message)
             }
 
         })
@@ -279,33 +279,34 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
                     val stringBuilder = StringBuilder()
                     val uri = data!!.data as Uri
                     val mimeType = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
-                    Log.d("MimeType", mimeType)
-                    if (mimeType.contains("json")) {
-                        contentResolver.openInputStream(uri)?.use {
-                            BufferedReader(InputStreamReader(it)).use { reader ->
-                                var line = reader.readLine()
-                                while (line != null) {
-                                    stringBuilder.append(line)
-                                    line = reader.readLine()
+                    Log.d("MimeType", uri.toString())
+                    contentResolver.openInputStream(uri)?.use {
+                        BufferedReader(InputStreamReader(it)).use { reader ->
+                            var line = reader.readLine()
+                                    while (line != null) {
+                                        stringBuilder.append(line)
+                                        line = reader.readLine()
                                 }
                             }
-                        }
-                        val result = stringBuilder.toString()
-                        Log.d("ReadJso", result)
-                        lateinit var temp: ArrayList<DaysClass>
-                        temp = gson.fromJson(
-                            result,
-                            object : TypeToken<ArrayList<DaysClass>>() {}.type
-                        )
-                        list.clear()
-                        recyclerAdapter.notifyDataSetChanged()
-                        temp.forEach { day ->
-                            list.add(day)
-                        }
-                        saveList()
-                        Log.d("List", list.toString())
-                        load()
 
+                        val result = stringBuilder.toString() as String
+                        println(result.first())
+                        if(result.first() == ('[')) {
+                            Log.d("ReadJso", result)
+                            lateinit var temp: ArrayList<DaysClass>
+                            temp = gson.fromJson(
+                                result,
+                                object : TypeToken<ArrayList<DaysClass>>() {}.type
+                            )
+                            list.clear()
+                            recyclerAdapter.notifyDataSetChanged()
+                            temp.forEach { day ->
+                                list.add(day)
+                            }
+                            saveList()
+                            Log.d("List", list.toString())
+                            load()
+                        }
                     }
                 }
             }
@@ -313,6 +314,7 @@ class MainActivity : AppCompatActivity(), FullscreenDialogInterface {
             FILE_CREATE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     val uri = data!!.data as Uri
+                    Log.d("Save", uri.toString());
                     contentResolver.openFileDescriptor(uri, "w")?.use {
                         FileOutputStream(it.fileDescriptor).use {
                             it.write(gson.toJson(list).toByteArray())

@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
         mAuth = FirebaseAuth.getInstance()
-        supportFragmentManager.beginTransaction().add(R.id.fragment, LoginFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment, LoginFragment()).commit()
 
 
 
